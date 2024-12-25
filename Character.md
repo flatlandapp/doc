@@ -1,5 +1,9 @@
 
-![flatKing](circle.svg)
+<div style="display: flex; justify-content: space-around; align-items: center;">
+  <img src="circle.svg" alt="Flatland Token" width="300" height="300">
+  <img src="square.svg" alt="Flatland Token" width="300" height="300">
+  <img src="triangles.svg" alt="Flatland Token" width="300" height="300">
+</div>
 
 ## **Crypto《Flatland》 Character Guide**
 
