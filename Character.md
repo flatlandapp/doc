@@ -1,3 +1,6 @@
+
+![flatKing](circle.svg)
+
 ## **Crypto《Flatland》 Character Guide**
 
 Welcome to the world of **Crypto《Flatland》**! Here, every character is a unique geometric being with its own shape, color, social status, and attributes. By participating in the game and interacting with the ecosystem, your character can evolve and unlock new possibilities!
