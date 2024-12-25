@@ -1,3 +1,5 @@
+![alt text](token.png)
+
 # **Crypto Flatland**
 
 Welcome to **Crypto Flatland**, a groundbreaking NFT project that brings the legendary world of Flatland to life in the Web3 era. Inspired by Edwin A. Abbott's timeless novella *Flatland: A Romance of Many Dimensions*, this collection of unique 2D characters reimagines the geometric beings of Flatland in a vibrant, interactive, and ever-evolving digital universe.
