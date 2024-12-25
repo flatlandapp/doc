@@ -1,0 +1,48 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 800">
+    <defs>
+        <filter id="nf1" color-interpolation-filters="sRGB" primitiveUnits="userSpaceOnUse"
+            filterUnits="objectBoundingBox" height="400%" width="400%" y="-100%" x="-100%">
+            <feGaussianBlur result="blur" edgeMode="none" in="SourceGraphic" height="100%" width="100%" y="0%" x="0%"
+                stdDeviation="17 8" />
+        </filter>
+        <filter id="nf2" color-interpolation-filters="sRGB" primitiveUnits="userSpaceOnUse"
+            filterUnits="objectBoundingBox" height="400%" width="400%" y="-100%" x="-100%">
+            <feGaussianBlur result="blur" edgeMode="none" in="SourceGraphic" height="100%" width="100%" y="0%" x="0%"
+                stdDeviation="10 17" />
+        </filter>
+        <filter id="nf3">
+            <feTurbulence baseFrequency="0.6" />
+            <feColorMatrix values="0 0 0 9 -5 0 0 0 9 -5 0 0 0 9 -5 0 0 0 0 1" />
+        </filter>
+        <linearGradient id="n-grad" y2="100%" x2="50%" y1="0%" x1="50%">
+            <stop offset="0%" stop-color="hsl(184, 74%, 44%)" />
+            <stop offset="100%" stop-color="hsl(332, 87%, 70%)" />
+        </linearGradient>
+    </defs>
+    <path filter="url(#nf3)" d="M-1-1h800v800H-1z" />
+    <g>
+        <g stroke-width="30" stroke="url(#n-grad)" fill="none">
+            <circle r="247.5" cx="400" cy="400" filter="url(#nf1)">
+                <animate attributeName="r" values="247.5; 252; 247.5" dur="1s" repeatCount="indefinite" />
+            </circle>
+            <circle r="247.5" cx="412" cy="400" filter="url(#nf2)" opacity=".22">
+                <animate attributeName="r" values="247.5; 252; 247.5" dur="1s" repeatCount="indefinite" />
+            </circle>
+            <circle r="247.5" cx="388" cy="400" filter="url(#nf2)" opacity=".22">
+                <animate attributeName="r" values="247.5; 252; 247.5" dur="1s" repeatCount="indefinite" />
+            </circle>
+            <circle r="247.5" cx="400" cy="400">
+                <animate attributeName="r" values="247.5; 252; 247.5" dur="1s" repeatCount="indefinite" />
+            </circle>
+        </g><text font-size="14" y="30" x="10" fill="#f1f1be">🧬 Visionary</text><text stroke-width="0">
+            <animate attributeName="fill" dur="3s" values="#f1f1be; purple; #f1f1be" repeatCount="indefinite" />64<tspan
+                y="500" x="300">⚔️ 57</tspan>
+            <tspan y="500" x="370">📖 98</tspan>
+            <tspan y="500" x="440">👀 64</tspan>
+            <tspan font-size="35" y="430" x="310">♀️ Noble</tspan>
+            <tspan font-size="16" y="780" x="60" fill="#888">Origin:
+                0xbd4217b5e0285cc54827ff229c6ee8cb613657e48869a2300ddf4c3e9bc597de</tspan>
+            <tspan font-size="12" y="30" x="700" fill="#666">Chain 11155111</tspan>
+        </text>
+    </g>
+</svg>
