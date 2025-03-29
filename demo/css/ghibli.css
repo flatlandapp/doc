@@ -1,0 +1,127 @@
+/* 吉卜力风格CSS - 灵感来自宫崎骏动画作品 */
+:root {
+  --ghibli-primary: #83c5be;
+  --ghibli-secondary: #e29578;
+  --ghibli-background: #ffddd2;
+  --ghibli-text: #006d77;
+  --ghibli-accent: #edf6f9;
+  --ghibli-dark: #006d77;
+  --ghibli-light: #edf6f9;
+  --ghibli-shadow: rgba(0, 109, 119, 0.2);
+  
+  /* 几何形状角色颜色 */
+  --warrior-color: #e76f51; /* 三角形战士 */
+  --priest-color: #2a9d8f;  /* 正方形牧师 */
+  --scholar-color: #e9c46a; /* 菱形学者 */
+  --noble-color: #264653;   /* 圆形贵族 */
+}
+
+body {
+  font-family: 'Avenir', 'Helvetica', sans-serif;
+  background-color: var(--ghibli-background);
+  color: var(--ghibli-text);
+  margin: 0;
+  padding: 0;
+  line-height: 1.6;
+  background-image: 
+    radial-gradient(circle at 20% 20%, rgba(255, 255, 255, 0.2) 0%, transparent 50%),
+    radial-gradient(circle at 80% 80%, rgba(255, 255, 255, 0.2) 0%, transparent 50%);
+}
+
+.ghibli-header {
+  background-color: var(--ghibli-primary);
+  color: var(--ghibli-light);
+  padding: 1rem 2rem;
+  text-align: center;
+  box-shadow: 0 4px 12px var(--ghibli-shadow);
+  border-bottom: 3px solid var(--ghibli-secondary);
+}
+
+.ghibli-header h1 {
+  margin: 0;
+  font-size: 2.5rem;
+  letter-spacing: 1px;
+  text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.2);
+}
+
+.ghibli-header p {
+  margin: 0.5rem 0 0;
+  font-size: 1.2rem;
+  opacity: 0.9;
+}
+
+.ghibli-footer {
+  background-color: var(--ghibli-dark);
+  color: var(--ghibli-light);
+  text-align: center;
+  padding: 1rem;
+  margin-top: 2rem;
+  font-size: 0.9rem;
+}
+
+/* 卡片风格元素 */
+.ghibli-card {
+  background-color: var(--ghibli-accent);
+  border-radius: 12px;
+  box-shadow: 0 4px 8px var(--ghibli-shadow);
+  padding: 1.5rem;
+  margin: 1rem 0;
+  transition: transform 0.3s ease;
+}
+
+.ghibli-card:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 6px 12px var(--ghibli-shadow);
+}
+
+/* 按钮风格 */
+.ghibli-button {
+  background-color: var(--ghibli-secondary);
+  color: white;
+  border: none;
+  border-radius: 50px;
+  padding: 0.8rem 1.5rem;
+  font-size: 1rem;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  box-shadow: 0 2px 4px var(--ghibli-shadow);
+}
+
+.ghibli-button:hover {
+  background-color: #d68267;
+  transform: scale(1.05);
+}
+
+/* 几何形状角色样式 */
+.triangle {
+  color: var(--warrior-color);
+}
+
+.square {
+  color: var(--priest-color);
+}
+
+.diamond {
+  color: var(--scholar-color);
+}
+
+.circle {
+  color: var(--noble-color);
+}
+
+/* 动画效果 */
+@keyframes float {
+  0% {
+    transform: translateY(0px);
+  }
+  50% {
+    transform: translateY(-10px);
+  }
+  100% {
+    transform: translateY(0px);
+  }
+}
+
+.floating {
+  animation: float 5s ease-in-out infinite;
+}

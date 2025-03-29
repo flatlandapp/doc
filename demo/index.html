@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Flatland 虚拟小镇演示</title>
+    <link rel="stylesheet" href="css/ghibli.css">
+    <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+    <header class="ghibli-header">
+        <h1>Flatland 虚拟小镇</h1>
+        <p>一个由AI驱动的平面几何宇宙</p>
+    </header>
+
+    <main>
+        <div id="canvas-container"></div>
+        
+        <div class="control-panel">
+            <div class="actions">
+                <h2>操作面板</h2>
+                <div class="buttons">
+                    <button class="ghibli-button" onclick="addMoreResidents(10)">添加10个居民</button>
+                    <button class="ghibli-button" onclick="triggerRandomEvent()">生成随机事件</button>
+                    <button class="ghibli-button" onclick="toggleDebugInfo()">显示/隐藏调试信息</button>
+                </div>
+                <div class="tip">* 点击画布空白处可移动一个随机角色，点击角色可查看详情</div>
+            </div>
+            
+            <div class="town-info">
+                <h2>小镇信息</h2>
+                <div id="town-stats"></div>
+            </div>
+            
+            <div class="event-log">
+                <h2>事件记录</h2>
+                <div id="event-log-content"></div>
+            </div>
+            
+            <div class="character-details">
+                <h2>角色详情</h2>
+                <div id="selected-character"></div>
+            </div>
+        </div>
+    </main>
+
+    <footer class="ghibli-footer">
+        <p>Flatland虚拟小镇演示 - 基于p5.js实现</p>
+    </footer>
+    
+    <!-- 引入p5.js库 -->
+    <script src="https://cdn.jsdelivr.net/npm/p5@1.6.0/lib/p5.js"></script>
+    
+    <!-- 引入自定义JS文件 -->
+    <script src="js/characters.js"></script>
+    <script src="js/town.js"></script>
+    <script src="js/events.js"></script>
+    <script src="js/ai-agent.js"></script>
+    <script src="js/event-display.js"></script>
+    <script src="js/sketch.js"></script>
+</body>
+</html>

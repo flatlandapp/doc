@@ -10,6 +10,8 @@
   - [Technical Architecture](/en/Guide/TechnicalArchitecture)
   - [Dynamic NFT](/en/Guide/NFT)
     - [Launch](/en/Guide/NFTLaunch)
+- [AI-Generated Stories](/en/story/README)
+    - [Secrets of the Flatland Ruins](/en/story/story_1)
 - [Whitepaper](/en/whitepaper/0-description)
   - [1-Introduction](/en/whitepaper/1-0-introduction)
   - [1.1-Web2 Limitations](/en/whitepaper/1-1-web2-limitations)
