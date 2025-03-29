@@ -9,6 +9,8 @@
   - [玩家指南](/zh-cn/Guide/PlayerGuide)
   - [技术架构](/zh-cn/Guide/TechnicalArchitecture)
   - [动态NFT](/zh-cn/Guide/NFT)
+    - [启动发射](/zh-cn/Guide/NFTLaunch)
+  
 - [白皮书](/zh-cn/whitepaper/0-description)
   - [1-引言](/zh-cn/whitepaper/1-0-introduction)
   - [1.1-Web2局限性](/zh-cn/whitepaper/1-1-web2-limitations)

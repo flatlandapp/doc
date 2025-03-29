@@ -1,5 +1,7 @@
 # Launching NFT in the AI Era - Flatworld Pioneer Gameplay
 
+![Features](../../images/game_home.png)
+
 ## Gameplay Overview
 
 "Launching NFT in the AI Era" is Flatworld project's initial launch gameplay, allowing early participants to earn rare NFTs and pioneer status through AI battles. This gameplay not only tests players' strategy and decision-making abilities but also impacts your long-term benefits and status in the Flatworld ecosystem.
@@ -7,6 +9,8 @@
 ## Core Gameplay Mechanics
 
 ### AI Game Experience
+
+![Features](../../images/game_panel.png)
 
 In the Flatworld, you will complete challenges against AI and earn genesis NFT rewards. During gameplay you will need to:
 
@@ -16,6 +20,8 @@ In the Flatworld, you will complete challenges against AI and earn genesis NFT r
 
 ### Playing Against AI
 
+![Features](../../images/vsAI.png)
+
 This is an interactive process based on classic game theory:
 
 - Each round of battle is a strategic choice
@@ -24,6 +30,8 @@ This is an interactive process based on classic game theory:
 
 ### NFT Rewards
 
+![Features](../../images/game_reward.png)
+
 The AI algorithm will analyze your decision patterns and **mint for free** NFTs that match your game style. Reward mechanism:
 
 - Battle performance directly affects the rarity of NFT you receive
@@ -31,6 +39,8 @@ The AI algorithm will analyze your decision patterns and **mint for free** NFTs 
 - Early obtained NFTs will have special identity and rights in the future
 
 ## Player vs AI Battle Interface
+
+![Features](../../images/game_center.png)
 
 The battle interface displays core data comparison between players and AI:
 
@@ -42,11 +52,15 @@ The battle interface displays core data comparison between players and AI:
 
 ## Battle History and Reward Preview
 
+![Features](../../images/game_history.png)
+
 - Each battle result will be recorded on the blockchain
 - You can view detailed battle history and scores
 - The system provides NFT reward previews, showing potential earnings
 
 ## Leaderboard System
+
+![Features](../../images/game_top.png)
 
 The leaderboard displays player performance in the pioneer program:
 
@@ -56,6 +70,8 @@ The leaderboard displays player performance in the pioneer program:
 
 ## Strategic Tips
 
+![Features](../../images/game_round.png)
+
 As a Flatworld pioneer, here are some tips to help you succeed in the game:
 
 - **Observe AI reaction patterns**: Pay attention to how AI adapts to your strategy in multi-round battles
@@ -63,11 +79,14 @@ As a Flatworld pioneer, here are some tips to help you succeed in the game:
 - **Long-term planning**: Sometimes short-term losses may bring long-term gains
 - **Balance cooperation and competition**: Choosing cooperation at appropriate times may achieve better overall returns
 
-## Technical Implementation
+## Become a Metadata Minter
+
+![Features](../../images/game_minter.png)
 
 - Battle results are recorded on the blockchain through smart contracts
-- Zero-knowledge proof technology ensures game fairness
 - NFT attributes and metadata are directly determined by your game performance
+- NFT minting fees are entirely determined by users and the market
+- Game participants enjoy metadata earnings
 
 ## Next Steps
 
