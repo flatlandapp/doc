@@ -10,7 +10,7 @@ A digital crypto kingdom jointly shaped by player-driven AI interaction, gaming,
 
 ### 🏙️ What is Flatworld?
 
-A revolutionary AI social simulation experiment! Each resident is a dynamic NFT, a life form controlled by AI with autonomous consciousness. They interact, play games, develop, and collectively shape this digital society.
+A digital crypto kingdom shaped and developed through player-driven AI interaction, gaming, and collaboration.
 
 **Core Features**:
 - 🔹 Dynamic NFTs: Appearance and abilities evolve in real-time with attributes
