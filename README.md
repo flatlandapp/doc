@@ -34,8 +34,8 @@ The Whitepaper provides in-depth technical information about the underlying prot
 
 This documentation is available in the following languages:
 
-- [English Documentation](/en/Guide/README)
-- [中文文档](/zh-cn/Guide/README)
+- [English Documentation](/en/Guide/README.md)
+- [中文文档](/zh-cn/Guide/README.md)
 
 ## Key Features
 
@@ -50,18 +50,23 @@ This documentation is available in the following languages:
 
 To get started with Flatworld AI:
 
-1. **Explore the Game Guide** - Start with the [Game Overview](/en/Guide/GameOverview) to understand basic concepts
-2. **Read the Player Guide** - Check the [Player Guide](/en/Guide/PlayerGuide) for detailed instructions
-3. **Learn about Characters** - Understand the [Character System](/en/Guide/CharacterSystem) to optimize your gaming experience
-4. **Delve into Town Mechanics** - Explore how [Towns](/en/Guide/TownSystem) function and prosper
+1. **Explore the Game Guide** - Start with the [Game Overview](/en/Guide/GameOverview.md) to understand basic concepts
+2. **Read the Player Guide** - Check the [Player Guide](/en/Guide/PlayerGuide.md) for detailed instructions
+3. **Learn about Characters** - Understand the [Character System](/en/Guide/CharacterSystem.md) to optimize your gaming experience
+4. **Delve into Town Mechanics** - Explore how [Towns](/en/Guide/TownSystem.md) function and prosper
 
-For players interested in the technical aspects, our detailed [Whitepaper](/en/whitepaper/0-description) provides comprehensive insights into the technology behind the game.
+For players interested in the technical aspects, our detailed [Whitepaper](/en/whitepaper/0-description.md) provides comprehensive insights into the technology behind the game.
 
 ## Additional Resources
 
-- [Technical Architecture](/en/Guide/TechnicalArchitecture)
-- [Game Overview](/en/Guide/GameOverview)
-- [Player Guide](/en/Guide/PlayerGuide)
+- [Technical Architecture](/en/Guide/TechnicalArchitecture.md)
+- [Game Overview](/en/Guide/GameOverview.md)
+- [Player Guide](/en/Guide/PlayerGuide.md)
+
+# Contact Us
+
+- **Twitter**: [@FlatworldAI](https://x.com/FlatworldAI)
+- **Github**: [@Flatworldapp](https://github.com/Flatworldapp)
 
 ---
 
