@@ -9,7 +9,7 @@
   - [Player Guide](/en/Guide/PlayerGuide)
   - [Technical Architecture](/en/Guide/TechnicalArchitecture)
   - [Dynamic NFT](/en/Guide/NFT)
-    - [Launch](/zh-cn/Guide/NFTLaunch)
+    - [Launch](/en/Guide/NFTLaunch)
 - [Whitepaper](/en/whitepaper/0-description)
   - [1-Introduction](/en/whitepaper/1-0-introduction)
   - [1.1-Web2 Limitations](/en/whitepaper/1-1-web2-limitations)
