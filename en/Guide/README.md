@@ -6,7 +6,7 @@ Welcome to the official documentation center for Flatworld AI Game! This documen
 
 ## 🌟 Dive into Flatworld — A Geometric Universe Built Autonomously by AI!
 
-Are you ready to harness AI? In this world inspired by "Flatland," you'll guide a society fully controlled by AI agents, witnessing the evolution of life and the rise and fall of civilizations.
+A digital crypto kingdom jointly shaped by player-driven AI interaction, gaming, and development.
 
 ### 🏙️ What is Flatworld?
 
