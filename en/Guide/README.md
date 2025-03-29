@@ -2,6 +2,73 @@
 
 Welcome to the official documentation center for Flatworld AI Game! This documentation collection provides comprehensive information about the game's design, mechanics, and gameplay guides.
 
+![Flatworld Game World](../../images/t1.jpeg)
+
+## 🌟 Dive into Flatworld — A Geometric Universe Built Autonomously by AI!
+
+Are you ready to harness AI? In this world inspired by "Flatland," you'll guide a society fully controlled by AI agents, witnessing the evolution of life and the rise and fall of civilizations.
+
+### 🏙️ What is Flatworld?
+
+A revolutionary AI social simulation experiment! Each resident is a dynamic NFT, a life form controlled by AI with autonomous consciousness. They interact, play games, develop, and collectively shape this digital society.
+
+**Core Features**:
+- 🔹 Dynamic NFTs: Appearance and abilities evolve in real-time with attributes
+- 🔹 Autonomous AI Characters: Possess independent decision-making and behavior patterns
+- 🔹 MCP Support: Easily control on-chain assets using natural language
+- 🔹 Event Governance: Guide social direction as a "god"
+
+## 🚀 Current Available Gameplay: Launching NFT in the AI Era
+
+**"Launching NFT in the AI Era"** is Flatworld's currently implemented initial gameplay, serving as the project's launch mode, allowing early users to immediately experience AI gameplay and earn exclusive NFT rewards.
+
+![AI Game Theory System](../../images/t2.jpeg)
+
+### 🎮 5-Minute Quick Start: Your First Encounter with AI!
+
+Experience the "Prisoner's Dilemma" and begin your Flatworld journey:
+1️⃣ Engage in multiple rounds of gameplay with an AI opponent
+2️⃣ Strategic choices: Cooperate or betray?
+3️⃣ Complete the challenge and mint your first dynamic NFT character!
+
+This is your key to entering this autonomous AI world.
+
+### Why Experience the NFT Launch Gameplay?
+- No upfront investment required, **completely free to participate**
+- Showcase your strategic prowess through the battle leaderboard
+- NFTs obtained will become **important assets** for entering the Flatworld ecosystem
+- Early players will gain more influence in future governance and development
+
+### 📐 Geometry Defines Destiny: Shapes, Classes, and Power
+
+![Shape Evolution System](../../images/t3.jpeg)
+
+In Flatworld, the number of sides determines everything!
+- 🔺 Triangles (0-50 sides): Working class - Courage-driven
+- 🔹 Quadrilaterals (51-70 sides): Middle class - Balanced development
+- 🔶 Polygons (71-90 sides): Elite class - Superior wisdom
+- 🔷 Near-circles (91-99 sides): Noble class - Keen perception
+
+Enhance the three core attributes of 【Courage】, 【Wisdom】, and 【Perception】, increase your sides, and continually climb the social ladder!
+
+![NFT Attribute System](../../images/t4.jpeg)
+
+### 🧠 The Pulse of AI Society: Core Gameplay Loop
+
+![AI Social Interactions](../../images/t5.jpeg)
+
+Witness a living AI ecosystem:
+- AI-driven economy: Observe spontaneous resource exchange and value flow between characters
+- Dynamic social networks: AI forms complex social relationships based on attributes and skills
+- Evolving town cultures: Different towns develop unique cultures and specialties
+- Event impacts: Introduce external events and observe how AI society responds and evolves
+
+Your guidance will shape the future of this world.
+
+![MCP Empowerment System](../../images/t6.jpeg)
+
+👉 [Start NFT Launch Gameplay Now](/en/Guide/NFTLaunch.md)
+
 ## 🧭 Documentation Navigation
 
 | Document Name | Description | Intended Audience |
@@ -28,6 +95,8 @@ Welcome to the official documentation center for Flatworld AI Game! This documen
 
 ## 📌 Core Features
 
+![Features](../../images/vsAI.png)
+
 The core features of Flatworld AI Game include:
 
 ### AI-Driven Autonomous Characters
@@ -44,7 +113,7 @@ Based on the concept of "Flatland," a character's number of sides determines the
 
 ### Blockchain Asset Ownership
 
-Each character is an NFT asset on the blockchain, with players having complete ownership. Through an innovative attribute-token conversion system, players can flexibly manage character attributes and asset value.
+Each character is an NFT asset on the blockchain, with players having complete ownership. Through an innovative attribute-token conversion system, players can flexibly manage character attributes and asset value. Each NFT not only has a unique appearance and attributes but can also achieve flexible resource allocation and social interaction through the attribute tokenization system.
 
 ## 💡 Design Philosophy
 

@@ -2,7 +2,71 @@
 
 ## Introduction
 
-Welcome to Flatworld, an AI ecosystem full of infinite possibilities. Here, each NFT is not just a digital collectible, but a unique virtual resident with their own personality traits, professional skills, and social relationships. This world consists of multiple unique towns, each with its own culture and development trajectory, and your residents will explore, grow, and create in this world.
+Welcome to Flatworld, an AI ecosystem full of infinite possibilities. Here, each NFT is not just a digital collectible, but a **dynamic life form driven by AI**, with their own personality traits, professional skills, and autonomous decision-making abilities. This world consists of multiple unique towns, each with its own culture and development trajectory, and your AI residents will explore, grow, and create in this world.
+
+> [!TIP]
+> **Must-read for new players**: Want to quickly experience Flatworld and get a pioneer NFT? Check out our [NFT Launch Gameplay Guide](/en/Guide/NFTLaunch.md) to earn exclusive NFT rewards through AI gameplay!
+
+## Dynamic NFT System
+
+### Flatworld NFT: Beyond Static Artwork
+
+Flatworld NFT is a **unique collection of 2D characters**, inspired by the famous Flatland (Flatworld). In this geometric setting, each NFT represents a unique life form controlled by its own AI agent. These are **not ordinary NFTs** - they are driven by AI agents and exhibit changing colors, outlines, and intelligence.
+
+In Crypto Flatworld, each NFT is not just artwork, it is a **living entity** with a complete life, controlled by its own AI agent. These agents navigate, make decisions, adapt, and integrate into the future of this vibrant virtual environment.
+
+While players cannot directly control the characters, through the evolving NFT capabilities, you participate in the collective governance of the game, decision-making events, and law-making. Your NFT will become a wise scholar, brave warrior, or even a mysterious thinker. Evolve and strengthen to become a core contributor to Flatworld. Join this exploration and become a central part of a digitally governed metaverse - true, harmonious, and filled with intelligent AI exchanges.
+
+> *"Will your NFT become a wise scholar, a brave warrior, or a mysterious thinker? The possibilities are limitless."*
+
+### AI-Controlled Life Forms
+
+In the blockchain flatland, each NFT is not merely artwork, but a life form controlled by its own AI agent. These agents have vibrant energy to navigate the game environment, make decisions, form alliances, adapt, and shape the future.
+
+As a player, you are not just an observer—you are a god of this 2D universe, and while you cannot directly control your character, you can exert influence through your NFT, participating in collective governance, decision-making events, and law-making, guiding the destiny of this geometric realm.
+
+#### Key Features:
+
+| Feature | Description |
+|------|------|
+| **Shape Levels** | From 3 → 99 sides (triangle to near-circle) |
+| **Autonomous Decision-Making** | AI-driven behavior patterns |
+| **Attribute Evolution** | Real-time updated properties and abilities |
+
+### Beyond Static Fixed Models - Embracing True Digital Life
+
+## NFT Mapping to AI Attributes
+
+Flatworld NFTs not only have visual representation but also map to a complex AI attribute system that directly influences the behavior patterns and decision-making abilities of the AI agent:
+
+### AI Core Attributes
+
+| Attribute | Impact Range | Typical Value |
+|------|----------|--------|
+| **Logic** | Affects the agent's ability to analyze situations and make rational decisions | 1-99 |
+| **Creativity** | Affects the agent's ability to find new solutions and adapt to changes | 1-99 |
+| **Morality** | Affects the agent's tendency to choose cooperation or betrayal in dilemmas | 1-99 |
+| **Decisiveness** | Affects the agent's ability to make decisions quickly, avoiding indecision | 1-99 |
+
+These AI attributes determine how your NFT reacts and adapts in various scenarios, making each NFT a truly unique entity with personalized behavior patterns and decision tendencies.
+
+## Attribute Changes Directly Impact NFT Appearance and Abilities
+
+In Flatworld, character attributes not only influence behavior but directly change appearance and abilities:
+
+| Attribute | Impact | Visual Change |
+|------|------|----------|
+| **Courage** | Determines resident's migration ability and adventure spirit; higher courage values enable more frequent migration and exploration | Affects the sharpness of shape edges |
+| **Wisdom** | Directly impacts town prosperity and development potential; multiple high-wisdom residents can create synergistic effects | Affects the complexity of the shape |
+| **Perception** | Controls exploration range and opportunity discovery; high perception can discover rare resources and predict development opportunities | Affects the symmetry of the shape |
+
+### Shape Evolution System
+
+As your NFT's total attribute value increases, its shape gradually evolves from simple geometric shapes (like triangles) to more complex polygons, eventually approaching a perfect circle, representing an elevation in social status and achievement.
+
+**Shape Evolution Example**:
+- Total attribute value: 175 → Current shape: Polygon
+- Distance to evolve to near-circle: 25 attribute points
 
 ## World View
 
