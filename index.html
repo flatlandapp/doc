@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Flatworld AI Documentation</title>
+  <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
+  <meta name="description" content="Flatworld AI - Blockchain-based AI Game Documentation">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=1.0">
+  <link rel="stylesheet" href="//cdn.jsdelivr.net/npm/docsify@4/lib/themes/vue.css">
+  <link rel="stylesheet" href="//cdn.jsdelivr.net/npm/docsify-sidebar-collapse/dist/sidebar.min.css" />
+  <!-- 网站图标 -->
+  <link rel="icon" href="./logo.svg" type="image/svg+xml">
+</head>
+<body>
+  <div id="app"></div>
+  <script>
+    // 初始化docsify配置
+    window.$docsify = {
+      name: 'Flatworld AI',
+      repo: '',
+      loadSidebar: true,
+      loadNavbar: true,
+      auto2top: true,
+      subMaxLevel: 0,
+      sidebarDisplayLevel: 1,
+      // 根据语言加载不同的侧边栏
+      alias: {
+        '/zh-cn/.*/_sidebar.md': '/zh-cn/_sidebar.md',
+        '/en/.*/_sidebar.md': '/en/_sidebar.md',
+        '/zh-cn/(.*)': '/zh-cn/$1',
+        '/en/(.*)': '/en/$1'
+      },
+      homepage: 'README.md',
+      search: {
+        maxAge: 86400000,
+        paths: 'auto',
+        placeholder: {
+          '/zh-cn/': '搜索',
+          '/': 'Type to search'
+        },
+        noData: {
+          '/zh-cn/': '找不到结果',
+          '/': 'No results'
+        },
+        depth: 6
+      },
+      // 多语言支持
+      fallbackLanguages: ['en', 'zh-cn'],
+      // 自动根据URL切换语言
+      nameLink: {
+        '/zh-cn/': '#/zh-cn/',
+        '/en/': '#/en/',
+        '/': '#/'
+      },
+      // 封面配置
+      coverpage: true,
+      onlyCover: true,
+      // 字数统计
+      count:{
+        countable: true,
+        fontsize: '0.9em',
+        color: 'rgb(90,90,90)',
+        language: function() {
+          return window.location.hash.indexOf('/zh-cn/') !== -1 ? 'chinese' : 'english';
+        }
+      }
+    };
+  </script>
+  <!-- Docsify v4 -->
+  <script src="//cdn.jsdelivr.net/npm/docsify@4"></script>
+  <!-- 搜索插件 -->
+  <script src="//cdn.jsdelivr.net/npm/docsify/lib/plugins/search.min.js"></script>
+  <!-- 图片缩放插件 -->
+  <script src="//cdn.jsdelivr.net/npm/docsify/lib/plugins/zoom-image.min.js"></script>
+  <!-- 复制代码插件 -->
+  <script src="//cdn.jsdelivr.net/npm/docsify-copy-code/dist/docsify-copy-code.min.js"></script>
+  <!-- 字数统计插件 -->
+  <script src="//unpkg.com/docsify-count/dist/countable.js"></script>
+  <!-- 侧边栏折叠插件 -->
+  <script src="//cdn.jsdelivr.net/npm/docsify-sidebar-collapse/dist/docsify-sidebar-collapse.min.js"></script>
+  <!-- 语法高亮 -->
+  <script src="//cdn.jsdelivr.net/npm/prismjs@1/components/prism-bash.min.js"></script>
+  <script src="//cdn.jsdelivr.net/npm/prismjs@1/components/prism-javascript.min.js"></script>
+  <script src="//cdn.jsdelivr.net/npm/prismjs@1/components/prism-solidity.min.js"></script>
+  <!-- Mermaid支持 -->
+  <script src="//unpkg.com/mermaid/dist/mermaid.min.js"></script>
+  <script src="//unpkg.com/docsify-mermaid@latest/dist/docsify-mermaid.js"></script>
+  <script>mermaid.initialize({ startOnLoad: true });</script>
+</body>
+</html>
