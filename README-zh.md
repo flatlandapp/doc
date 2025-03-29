@@ -1,4 +1,4 @@
-# Flatworld AI 文档
+# Flatworld AI 文档 [英文](README.md)
 
 <p align="center">
   <img src="logo.svg" alt="Flatworld AI 标志" width="200">
