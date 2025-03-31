@@ -1,6 +1,6 @@
 # 在AI时代发射NFT - Flatworld先驱玩法
 
-![Features](../../images/game_home.png)
+![Features](../../images/Ghibli/game_home.png)
 
 ## 玩法概述
 
@@ -10,8 +10,6 @@
 
 ### AI游戏体验
 
-![Features](../../images/game_panel.png)
-
 在Flatworld世界，您将完成与AI的对抗，并获得创世NFT奖励。游戏过程中您需要:
 
 - 通过多轮对战展示您的策略能力
@@ -20,7 +18,7 @@
 
 ### 与AI博弈
 
-![Features](../../images/vsAI.png)
+![Features](../../images/Ghibli/game_panel.png)
 
 这是一个基于经典博弈论的交互过程:
 
@@ -30,7 +28,7 @@
 
 ### NFT奖励
 
-![Features](../../images/game_reward.png)
+![Features](../../images/Ghibli/game_reward.png)
 
 AI算法将分析您的决策模式，**免费铸造**符合您博弈风格的NFT。奖励机制：
 
@@ -40,7 +38,7 @@ AI算法将分析您的决策模式，**免费铸造**符合您博弈风格的NF
 
 ## 玩家与AI对战界面
 
-![Features](../../images/game_center.png)
+![Features](../../images/Ghibli/game_center.png)
 
 对战界面展示了玩家与AI的核心数据对比:
 
@@ -52,7 +50,7 @@ AI算法将分析您的决策模式，**免费铸造**符合您博弈风格的NF
 
 ## 对战历史与奖励预览
 
-![Features](../../images/game_history.png)
+![Features](../../images/Ghibli/game_history.png)
 
 - 每场对战结果都会被记录在链上
 - 您可以查看详细的对战历史与得分情况
@@ -60,7 +58,7 @@ AI算法将分析您的决策模式，**免费铸造**符合您博弈风格的NF
 
 ## 排行榜系统
 
-![Features](../../images/game_top.png)
+![Features](../../images/Ghibli/game_top.png)
 
 排行榜展示了玩家在先驱者计划中的表现:
 
@@ -70,7 +68,7 @@ AI算法将分析您的决策模式，**免费铸造**符合您博弈风格的NF
 
 ## 战略提示
 
-![Features](../../images/game_round.png)
+![Features](../../images/Ghibli/game_round.png)
 
 作为Flatworld的先驱者，这里有一些帮助您在游戏中获得成功的提示:
 
@@ -79,22 +77,19 @@ AI算法将分析您的决策模式，**免费铸造**符合您博弈风格的NF
 - **长远规划**: 有时短期的损失可能带来长期的收益
 - **平衡合作与竞争**: 在适当时机选择合作可能获得更好的总体收益
 
-## 成为元数据铸造者
+## 赢得胜利
 
-![Features](../../images/game_minter.png)
+![Features](../../images/Ghibli/game_result.png)
 
-- 对战结果通过智能合约记录在区块链上
-- NFT的属性和元数据由您的游戏表现直接决定
-- NFT的铸造费用完全由用户和市场决定
-- 游戏参与者享受元数据收益
+- 您有3次机会与AI对弈
+- 任何一次机会赢得胜利，都以获得免费铸造创世NFT的资格
+- 赢取的创世NFT无需支付GAS，启动阶段将会直接发送至您的钱包地址
 
 ## 下一步
 
 完成先驱者NFT发射后，您可以:
 
 1. 探索Flatworld的完整生态系统
-2. 使用您的NFT角色参与小镇建设
-3. 开始属性代币化的经济活动
-4. 参与社区治理和决策过程
+2. 使用您的NFT角色参与平面小镇建设
 
 现在就开始您的Flatworld之旅，在AI时代铸造属于您的独特NFT吧！
