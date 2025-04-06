@@ -7,6 +7,3 @@ package-lock.json
 
 # Conversion script
 convert.js
-
-# Generated PNG files
-logo-*.png 
