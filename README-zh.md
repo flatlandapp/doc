@@ -1,7 +1,7 @@
 # Flatworld AI 文档 [英文](README.md)
 
 <p align="center">
-  <img src="logo.svg" alt="Flatworld AI 标志" width="200">
+  <img src="logo-xl.png" alt="Flatworld AI 标志" width="200">
 </p>
 
 欢迎来到Flatworld AI的官方文档，这是一款受Edwin A. Abbott经典小说《平面国》启发的创新区块链AI游戏。

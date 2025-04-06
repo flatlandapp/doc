@@ -1,4 +1,4 @@
-![logo](logo.svg ':size=200')
+![logo](logo-xl.png ':size=200')
 
 # Flatworld AI <small>Documentation</small>
 

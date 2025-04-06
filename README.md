@@ -1,7 +1,7 @@
 # Flatworld AI Documentation [中文](README-zh.md)
 
 <p align="center">
-  <img src="logo.svg" alt="Flatworld AI Logo" width="200">
+  <img src="logo-xl.png" alt="Flatworld AI Logo" width="200">
 </p>
 
 Welcome to the official documentation for Flatworld AI, an innovative blockchain-based AI game inspired by Edwin A. Abbott's classic novel "Flatland."
