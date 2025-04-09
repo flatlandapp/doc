@@ -46,6 +46,28 @@
 - **属性代币系统**：创新的属性-代币转换机制
 - **带有AI策略的事件系统**：复杂的决策场景
 
+## 本地开发
+
+在本地运行此文档：
+
+1. 全局安装 docsify-cli：
+```bash
+npm i docsify-cli -g
+```
+
+2. 克隆此仓库并进入项目目录：
+```bash
+git clone <repository-url>
+cd <project-directory>
+```
+
+3. 启动本地服务器：
+```bash
+docsify serve .
+```
+
+4. 在浏览器中访问 `http://localhost:3000` 查看文档。
+
 ## 快速入门
 
 开始体验Flatworld AI：

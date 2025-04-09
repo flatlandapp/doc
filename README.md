@@ -46,6 +46,28 @@ This documentation is available in the following languages:
 - **Attribute Token System**: Innovative attribute-token conversion mechanism
 - **Event System with AI Strategy**: Complex decision-making scenarios
 
+## Local Development
+
+To run this documentation locally:
+
+1. Install docsify-cli globally:
+```bash
+npm i docsify-cli -g
+```
+
+2. Clone this repository and navigate to the project directory:
+```bash
+git clone <repository-url>
+cd <project-directory>
+```
+
+3. Start the local server:
+```bash
+docsify serve .
+```
+
+4. Visit `http://localhost:3000` in your browser to view the documentation.
+
 ## Quick Start
 
 To get started with Flatworld AI:
