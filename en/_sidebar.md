@@ -9,7 +9,6 @@
   - [Player Guide](/en/Guide/PlayerGuide)
   - [Technical Architecture](/en/Guide/TechnicalArchitecture)
   - [Dynamic NFT](/en/Guide/NFT)
-    - [Launch](/en/Guide/NFTLaunch)
 - [AI-Generated Stories](/en/story/README)
     - [Secrets of the Flatland Ruins](/en/story/story_1)
 - [Whitepaper](/en/whitepaper/0-description)
