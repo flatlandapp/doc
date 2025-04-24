@@ -11,6 +11,5 @@
 | [事件系统与AI策略](/zh-cn/Guide/EventSystem.md) | 游戏中的事件类型及AI策略博弈机制 | 喜欢战略思考的玩家 |
 | [AI代理系统](/zh-cn/Guide/AIAgentSystem.md) | AI代理如何控制角色及玩家如何影响AI | 对AI行为感兴趣的玩家 |
 | [NFT系统](/zh-cn/Guide/NFT.md) | Flatworld NFT生态系统、属性代币化和社交互动 | 对NFT资产和经济机制感兴趣的玩家 |
-| [经济与代币系统](/zh-cn/Guide/TokenSystem.md) | 游戏经济设计、代币机制和价值流通 | 关注经济系统的玩家 |
 | [玩家指南](/zh-cn/Guide/PlayerGuide.md) | 新手入门、界面介绍和操作指导 | 新玩家 |
 | [技术架构](/zh-cn/Guide/TechnicalArchitecture.md) | 游戏底层技术实现和智能合约设计 | 开发者和技术爱好者 |
