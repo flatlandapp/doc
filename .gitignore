@@ -7,3 +7,6 @@ package-lock.json
 
 # Conversion script
 convert.js
+
+# Workers directory
+workers/
