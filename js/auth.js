@@ -216,18 +216,78 @@
     hook.init(function() {
       log('Docsify 初始化，检查认证状态');
 
-      // 如果用户未认证，立即开始认证流程
-      if (!isAuthenticated()) {
-        log('用户未认证，准备开始认证流程');
-        // 使用setTimeout确保不会阻塞Docsify初始化
-        setTimeout(async function() {
-          log('开始认证流程');
-          try {
-            await authenticate();
-          } catch (error) {
-            console.error('认证过程出错:', error);
+      // 添加认证状态指示器和认证按钮
+      setTimeout(function() {
+        const nav = document.querySelector('.app-nav') || document.querySelector('nav');
+
+        if (nav) {
+          // 创建认证状态容器
+          const authContainer = document.createElement('div');
+          authContainer.className = 'auth-status-container';
+          authContainer.style.display = 'inline-block';
+          authContainer.style.marginRight = '15px';
+
+          // 更新认证状态显示
+          function updateAuthStatus() {
+            const isAuth = isAuthenticated();
+            authContainer.innerHTML = `
+              <span class="auth-status ${isAuth ? 'auth-status-ok' : 'auth-status-error'}"
+                    title="${isAuth ? '已认证' : '未认证'}">
+                ${isAuth ? '🔓' : '🔒'}
+              </span>
+              <button class="auth-nav-button" onclick="${isAuth ? 'window.clearFlatlandAuth()' : 'window.startFlatlandAuth()'}">
+                ${isAuth ? '清除认证' : '认证'}
+              </button>
+            `;
           }
-        }, 500);
+
+          // 初始更新
+          updateAuthStatus();
+
+          // 添加样式
+          const style = document.createElement('style');
+          style.textContent = `
+            .auth-status {
+              display: inline-block;
+              width: 20px;
+              height: 20px;
+              line-height: 20px;
+              text-align: center;
+              border-radius: 50%;
+              margin-right: 5px;
+            }
+            .auth-status-ok {
+              color: #42b983;
+            }
+            .auth-status-error {
+              color: #f56c6c;
+            }
+            .auth-nav-button {
+              padding: 2px 8px;
+              background-color: #42b983;
+              color: white;
+              border: none;
+              border-radius: 4px;
+              cursor: pointer;
+              font-size: 12px;
+            }
+            .auth-nav-button:hover {
+              background-color: #3aa776;
+            }
+          `;
+          document.head.appendChild(style);
+
+          // 将认证状态容器添加到导航栏
+          nav.insertBefore(authContainer, nav.firstChild);
+
+          // 每5秒更新一次认证状态
+          setInterval(updateAuthStatus, 5000);
+        }
+      }, 1000);
+
+      // 如果用户未认证，不自动触发认证流程，让用户手动点击认证按钮
+      if (!isAuthenticated()) {
+        log('用户未认证，等待用户手动触发认证');
       } else {
         log('用户已认证，继续初始化');
       }
@@ -237,10 +297,37 @@
     hook.beforeEach(function(content) {
       log('页面加载前检查认证状态');
 
-      // 如果用户未认证，显示访问受限页面
+      // 如果用户未认证，在内容底部添加认证提示，但仍然显示内容
       if (!isAuthenticated()) {
-        log('用户未认证，显示访问受限页面');
-        return '# 访问受限\n\n您需要有效的访问码才能查看此内容。\n\n<button onclick="location.reload()" class="auth-button">刷新页面重试</button>\n\n如果您遇到认证问题，可以尝试清除认证数据：\n\n<button onclick="window.clearFlatlandAuth()" class="auth-button">清除认证数据</button>\n\n<style>\n.auth-button {\n  padding: 8px 16px;\n  margin: 5px;\n  background-color: #42b983;\n  color: white;\n  border: none;\n  border-radius: 4px;\n  cursor: pointer;\n}\n.auth-button:hover {\n  background-color: #3aa776;\n}\n</style>';
+        log('用户未认证，添加认证提示');
+
+        // 添加认证提示
+        const authNotice = `
+
+---
+
+## 认证提示
+
+您当前正在以未认证状态查看文档。某些功能可能受限。
+
+<button onclick="window.startFlatlandAuth()" class="auth-button">立即认证</button>
+
+<style>
+.auth-button {
+  padding: 8px 16px;
+  margin: 5px;
+  background-color: #42b983;
+  color: white;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+}
+.auth-button:hover {
+  background-color: #3aa776;
+}
+</style>`;
+
+        return content + authNotice;
       }
 
       log('用户已认证，显示页面内容');
@@ -250,4 +337,7 @@
 
   // 初始检查
   log('auth.js 已加载，初始认证状态:', isAuthenticated() ? '已认证' : '未认证');
+
+  // 将认证函数暴露到全局，以便用户可以手动触发认证
+  window.startFlatlandAuth = authenticate;
 })();
