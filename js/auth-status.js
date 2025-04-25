@@ -2,89 +2,160 @@
 (function() {
   // 调试标志
   const DEBUG = true;
-  
+
   // 日志函数
   function log(...args) {
     if (DEBUG) {
       console.log('[AuthStatus]', ...args);
     }
   }
-  
+
   // 检查用户是否已认证
   function isAuthenticated() {
     try {
-      const authData = localStorage.getItem('flatland-auth');
-      
+      // 尝试从两个可能的键名获取认证数据
+      let authData = localStorage.getItem('flatland-auth');
+
+      // 如果没有找到，尝试旧的键名
+      if (!authData) {
+        authData = localStorage.getItem('flatworld-auth');
+
+        // 如果找到了旧键名的数据，迁移到新键名
+        if (authData) {
+          localStorage.setItem('flatland-auth', authData);
+          localStorage.removeItem('flatworld-auth');
+          log('已将认证数据从旧键名迁移到新键名');
+        }
+      }
+
       if (!authData) return false;
-      
+
       const authObj = JSON.parse(authData);
-      
+
       // 检查认证是否过期
       if (authObj.expireAt && authObj.expireAt < Date.now()) {
+        localStorage.removeItem('flatland-auth');
         return false;
       }
-      
-      // 检查是否是临时认证
+
+      // 检查是否是临时认证或本地认证
       const isTemporary = authObj.temporary === true;
-      
-      return { valid: true, temporary: isTemporary };
+      const isLocal = authObj.localAuth === true;
+
+      return {
+        valid: true,
+        temporary: isTemporary,
+        local: isLocal,
+        expireAt: authObj.expireAt
+      };
     } catch (e) {
       console.error('检查认证状态出错:', e);
       return false;
     }
   }
-  
+
   // 添加认证状态指示器
   function addAuthStatusIndicator() {
     log('添加认证状态指示器');
-    
+
     // 等待导航栏加载完成
     const checkNav = setInterval(() => {
       const nav = document.querySelector('.app-nav') || document.querySelector('nav');
-      
+
       if (nav) {
         clearInterval(checkNav);
-        
+
         // 创建认证状态容器
         const authContainer = document.createElement('div');
         authContainer.className = 'auth-status-container';
         authContainer.style.display = 'inline-block';
         authContainer.style.marginRight = '15px';
-        
+
         // 更新认证状态显示
         function updateAuthStatus() {
           const authStatus = isAuthenticated();
           const isAuth = authStatus && authStatus.valid;
           const isTemp = authStatus && authStatus.temporary;
-          
+          const isLocal = authStatus && authStatus.local;
+
+          // 计算过期时间
+          let expireInfo = '';
+          if (isAuth && authStatus.expireAt) {
+            const now = Date.now();
+            const expireTime = authStatus.expireAt;
+            const diffHours = Math.round((expireTime - now) / (1000 * 60 * 60));
+
+            if (diffHours < 24) {
+              expireInfo = `(${diffHours}小时后过期)`;
+            } else {
+              const diffDays = Math.round(diffHours / 24);
+              expireInfo = `(${diffDays}天后过期)`;
+            }
+          }
+
+          // 确定状态图标和文本
+          let statusIcon, statusClass, statusText;
+          if (!isAuth) {
+            statusIcon = '🔒';
+            statusClass = 'auth-status-error';
+            statusText = '未认证';
+          } else if (isTemp) {
+            statusIcon = '⏱️';
+            statusClass = 'auth-status-temp';
+            statusText = '临时认证 ' + expireInfo;
+          } else if (isLocal) {
+            statusIcon = '🔑';
+            statusClass = 'auth-status-local';
+            statusText = '本地认证 ' + expireInfo;
+          } else {
+            statusIcon = '🔓';
+            statusClass = 'auth-status-ok';
+            statusText = '已认证 ' + expireInfo;
+          }
+
           authContainer.innerHTML = `
-            <span class="auth-status ${isAuth ? (isTemp ? 'auth-status-temp' : 'auth-status-ok') : 'auth-status-error'}" 
-                  title="${isAuth ? (isTemp ? '临时认证' : '已认证') : '未认证'}">
-              ${isAuth ? (isTemp ? '⏱️' : '🔓') : '🔒'}
+            <span class="auth-status ${statusClass}" title="${statusText}">
+              ${statusIcon}
             </span>
+            <span class="auth-status-text">${statusText}</span>
             <button class="auth-nav-button" onclick="window.clearFlatlandAuth()">
               清除认证
             </button>
           `;
         }
-        
+
         // 初始更新
         updateAuthStatus();
-        
+
         // 添加样式
         const style = document.createElement('style');
         style.textContent = `
+          .auth-status-container {
+            display: flex;
+            align-items: center;
+            background-color: rgba(255, 255, 255, 0.8);
+            padding: 4px 8px;
+            border-radius: 4px;
+            box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+          }
           .auth-status {
             display: inline-block;
             width: 20px;
             height: 20px;
             line-height: 20px;
             text-align: center;
-            border-radius: 50%;
             margin-right: 5px;
+          }
+          .auth-status-text {
+            font-size: 12px;
+            margin-right: 10px;
+            white-space: nowrap;
           }
           .auth-status-ok {
             color: #42b983;
+          }
+          .auth-status-local {
+            color: #409eff;
           }
           .auth-status-temp {
             color: #e6a23c;
@@ -106,16 +177,16 @@
           }
         `;
         document.head.appendChild(style);
-        
+
         // 将认证状态容器添加到导航栏
         nav.insertBefore(authContainer, nav.firstChild);
-        
+
         // 每5秒更新一次认证状态
         setInterval(updateAuthStatus, 5000);
       }
     }, 1000);
   }
-  
+
   // 在页面加载完成后添加认证状态指示器
   if (document.readyState === 'loading') {
     document.addEventListener('DOMContentLoaded', addAuthStatusIndicator);
