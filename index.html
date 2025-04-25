@@ -13,6 +13,9 @@
 </head>
 <body>
   <div id="app"></div>
+  <!-- 认证脚本 - 必须在 docsify 配置之前加载 -->
+  <script src="js/auth.js"></script>
+
   <script>
     // 初始化docsify配置
     window.$docsify = {
@@ -86,7 +89,5 @@
   <script src="//unpkg.com/mermaid/dist/mermaid.min.js"></script>
   <script src="//unpkg.com/docsify-mermaid@latest/dist/docsify-mermaid.js"></script>
   <script>mermaid.initialize({ startOnLoad: true });</script>
-  <!-- 在其他脚本之后添加 -->
-  <script src="js/auth.js"></script>
 </body>
 </html>

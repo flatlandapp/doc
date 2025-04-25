@@ -1,9 +1,10 @@
 # 2.5 智能合约设计
 
-TW 协议的智能合约设计遵循模块化原则，以下展示核心合约接口及其功能。
+TW 协议的智能合约设计遵循模块化原则，以下展示核心合约接口及其功能，提供多种编程语言的实现。
 
 ## 2.5.1 主合约接口：AIProxyManager
 
+### Solidity 实现
 ```solidity
 // SPDX-License-Identifier: MIT
 pragma solidity ^0.8.17;
@@ -42,8 +43,90 @@ interface IAIProxyManager {
 }
 ```
 
+### Rust 实现
+```rust
+// AIProxyManager 接口的 Rust 版本
+
+use ethers::types::{Address, Bytes, H256, U256};
+
+#[derive(Debug, Clone)]
+pub struct AgentState {
+    pub owner: Address,         // AI代理的所有者
+    pub last_action: U256,      // 上次行为的时间戳
+    pub reward_balance: U256,   // 玩家运行代理的奖励余额
+    pub proof_hash: H256,       // 验证哈希
+    pub entropy: U256,          // 行为熵统计
+}
+
+pub trait AIProxyManager {
+    // 核心功能接口
+    fn register_agent(&mut self, agent_owner: Address, proof_hash: H256) -> Result<(), String>;
+
+    fn submit_action(
+        &mut self,
+        agent_owner: Address,
+        action_data: Bytes,
+        signature: Bytes,
+        entropy_proof: Bytes
+    ) -> Result<(), String>;
+
+    fn withdraw_reward(&mut self, agent_owner: Address) -> Result<(), String>;
+
+    // 查询接口
+    fn get_agent_state(&self, agent_owner: Address) -> Option<AgentState>;
+    fn is_action_valid(&self, action_data: Bytes, last_action_time: U256) -> bool;
+    fn calculate_reward(&self, action_data: Bytes) -> U256;
+}
+```
+
+### C++ 实现
+```cpp
+// AIProxyManager 接口的 C++ 版本
+
+#include <string>
+#include <vector>
+#include <optional>
+#include <array>
+#include <cstdint>
+
+using Address = std::array<uint8_t, 20>;
+using Hash = std::array<uint8_t, 32>;
+using Bytes = std::vector<uint8_t>;
+
+struct AgentState {
+    Address owner;           // AI代理的所有者
+    uint64_t lastAction;     // 上次行为的时间戳
+    uint64_t rewardBalance;  // 玩家运行代理的奖励余额
+    Hash proofHash;          // 验证哈希
+    uint64_t entropy;        // 行为熵统计
+};
+
+class IAIProxyManager {
+public:
+    virtual ~IAIProxyManager() = default;
+
+    // 核心功能接口
+    virtual void registerAgent(const Address& agentOwner, const Hash& proofHash) = 0;
+
+    virtual void submitAction(
+        const Address& agentOwner,
+        const Bytes& actionData,
+        const Bytes& signature,
+        const Bytes& entropyProof
+    ) = 0;
+
+    virtual void withdrawReward(const Address& agentOwner) = 0;
+
+    // 查询接口
+    virtual std::optional<AgentState> getAgentState(const Address& agentOwner) const = 0;
+    virtual bool isActionValid(const Bytes& actionData, uint64_t lastActionTime) const = 0;
+    virtual uint64_t calculateReward(const Bytes& actionData) const = 0;
+};
+```
+
 ## 2.5.2 辅助合约接口：验证器接口
 
+### Solidity 实现
 ```solidity
 // SPDX-License-Identifier: MIT
 pragma solidity ^0.8.17;
@@ -70,6 +153,77 @@ interface IActionVerifier {
         uint256 minEntropy
     ) external view returns (bool);
 }
+```
+
+### Rust 实现
+```rust
+// 行为验证器接口的 Rust 版本
+
+use ethers::types::{Address, Bytes, U256};
+
+pub trait ActionVerifier {
+    // 验证行为签名
+    fn verify_signature(
+        &self,
+        signer: Address,
+        data: Bytes,
+        signature: Bytes
+    ) -> bool;
+
+    // 验证行为合规性
+    fn verify_action(
+        &self,
+        action_data: Bytes,
+        character: Address,
+        timestamp: U256
+    ) -> bool;
+
+    // 验证行为熵
+    fn verify_entropy(
+        &self,
+        agent: Address,
+        entropy_proof: Bytes,
+        min_entropy: U256
+    ) -> bool;
+}
+```
+
+### C++ 实现
+```cpp
+// 行为验证器接口的 C++ 版本
+
+#include <vector>
+#include <array>
+#include <cstdint>
+
+using Address = std::array<uint8_t, 20>;
+using Bytes = std::vector<uint8_t>;
+
+class IActionVerifier {
+public:
+    virtual ~IActionVerifier() = default;
+
+    // 验证行为签名
+    virtual bool verifySignature(
+        const Address& signer,
+        const Bytes& data,
+        const Bytes& signature
+    ) const = 0;
+
+    // 验证行为合规性
+    virtual bool verifyAction(
+        const Bytes& actionData,
+        const Address& character,
+        uint64_t timestamp
+    ) const = 0;
+
+    // 验证行为熵
+    virtual bool verifyEntropy(
+        const Address& agent,
+        const Bytes& entropyProof,
+        uint64_t minEntropy
+    ) const = 0;
+};
 ```
 
 ## 2.5.3 核心合约功能
