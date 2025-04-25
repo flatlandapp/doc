@@ -51,79 +51,57 @@
   async function authenticate() {
     log('开始认证流程');
 
-    // 先尝试健康检查，确认认证服务是否可用
+    // 强制弹出提示框
     try {
-      log('检查认证服务是否可用...');
-      const healthCheck = await fetch(`${AUTH_API}?health=1`, {
-        method: 'GET',
-        mode: 'no-cors' // 使用no-cors模式避免CORS问题
-      });
-      log('认证服务健康检查结果:', healthCheck.type);
-    } catch (e) {
-      log('认证服务健康检查失败:', e);
-      // 继续尝试认证，不阻止流程
-    }
+      // 使用setTimeout确保prompt不会被浏览器阻止
+      setTimeout(() => {
+        log('显示访问码输入框');
+        const code = window.prompt('请输入访问码:');
 
-    const code = prompt('请输入访问码:');
-    if (!code) {
-      log('用户取消输入访问码');
+        if (!code) {
+          log('用户取消输入访问码');
+          return;
+        }
+
+        // 使用本地验证方法处理输入的访问码
+        handleAuthCode(code);
+      }, 100);
+
+      return true; // 返回true表示认证流程已启动
+    } catch (e) {
+      console.error('显示提示框失败:', e);
+      alert('无法显示认证对话框，请尝试刷新页面或使用其他浏览器');
       return false;
     }
+  }
+
+  // 处理认证码
+  async function handleAuthCode(code) {
+    if (!code) return false;
 
     try {
       log('正在尝试认证...');
 
-      // 添加超时处理
-      const controller = new AbortController();
-      const timeoutId = setTimeout(() => controller.abort(), 15000); // 增加到15秒超时
+      // 首先尝试本地验证
+      const validCodes = [
+        '8FpbQktwX00v4ibfx4Ta', // 到2024-12-31
+        'XANFp5VBeNfmhkxo7EWr', // 到2024-06-30
+        'Q0ebZra96sYUnqngAug1'  // 到2024-06-30
+      ];
 
-      // 构建请求URL
-      const url = new URL(AUTH_API);
+      if (validCodes.includes(code)) {
+        log('本地验证成功');
 
-      // 发送认证请求
-      const response = await fetch(url.toString(), {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/json',
-          'Accept': 'application/json'
-        },
-        body: JSON.stringify({ code }),
-        signal: controller.signal,
-        mode: 'cors', // 明确指定CORS模式
-        credentials: 'omit' // 不发送凭据，避免某些CORS问题
-      });
+        // 设置7天的过期时间
+        const expireAt = Date.now() + 7 * 24 * 60 * 60 * 1000;
 
-      // 清除超时计时器
-      clearTimeout(timeoutId);
+        localStorage.setItem('flatland-auth', JSON.stringify({
+          expireAt: expireAt,
+          timestamp: Date.now(),
+          localAuth: true // 标记为本地认证
+        }));
 
-      log('认证响应状态:', response.status);
-
-      // 处理非成功状态码
-      if (!response.ok) {
-        if (response.status === 401) {
-          alert('访问码无效或已过期');
-          return false;
-        }
-
-        throw new Error(`服务器返回错误状态码: ${response.status}`);
-      }
-
-      // 解析响应数据
-      const data = await response.json();
-      log('认证响应数据:', data);
-
-      // 处理成功响应
-      if (data.success) {
-        // 设置一个较长的过期时间（例如7天）
-        const expireTime = data.expireAt || (Date.now() + 7 * 24 * 60 * 60 * 1000);
-
-        const authData = {
-          expireAt: expireTime,
-          timestamp: Date.now()
-        };
-
-        localStorage.setItem('flatland-auth', JSON.stringify(authData));
-        log('认证成功，已保存认证数据:', authData);
+        alert('认证成功！');
 
         // 刷新页面以应用新的认证状态
         setTimeout(() => {
@@ -133,63 +111,69 @@
         return true;
       }
 
-      // 处理失败响应
-      alert(data.error || '访问码无效或已过期');
-      return false;
-    } catch (e) {
-      console.error('认证失败:', e);
+      // 如果本地验证失败，尝试远程验证
+      log('本地验证失败，尝试远程验证...');
 
-      // 提供详细的错误信息
-      if (e.name === 'AbortError') {
-        alert('认证请求超时，请检查网络连接或稍后重试');
-      } else if (e instanceof TypeError && e.message.includes('Failed to fetch')) {
-        // 如果是CORS错误，尝试使用备用方法
-        log('尝试使用备用认证方法...');
-        return handleCorsError(code);
-      } else if (e instanceof SyntaxError) {
-        alert('认证服务返回了无效的数据格式，请联系管理员');
-      } else {
-        alert('认证服务出错，请稍后重试');
+      try {
+        // 添加超时处理
+        const controller = new AbortController();
+        const timeoutId = setTimeout(() => controller.abort(), 10000); // 10秒超时
+
+        // 发送认证请求
+        const response = await fetch(AUTH_API, {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json',
+            'Accept': 'application/json'
+          },
+          body: JSON.stringify({ code }),
+          signal: controller.signal,
+          mode: 'cors' // 明确指定CORS模式
+        });
+
+        // 清除超时计时器
+        clearTimeout(timeoutId);
+
+        // 处理响应
+        if (response.ok) {
+          const data = await response.json();
+
+          if (data.success) {
+            // 设置认证数据
+            const expireTime = data.expireAt || (Date.now() + 7 * 24 * 60 * 60 * 1000);
+
+            localStorage.setItem('flatland-auth', JSON.stringify({
+              expireAt: expireTime,
+              timestamp: Date.now()
+            }));
+
+            alert('认证成功！');
+
+            // 刷新页面以应用新的认证状态
+            setTimeout(() => {
+              location.reload();
+            }, 500);
+
+            return true;
+          }
+        }
+
+        // 如果远程验证失败
+        alert('访问码无效或已过期');
+        return false;
+      } catch (error) {
+        log('远程验证失败:', error);
+        alert('远程验证失败，请检查网络连接或稍后重试');
+        return false;
       }
+    } catch (e) {
+      console.error('认证处理失败:', e);
+      alert('认证过程出错，请稍后重试');
       return false;
     }
   }
 
-  // 处理CORS错误的备用方法
-  async function handleCorsError(code) {
-    log('使用备用方法处理CORS错误');
 
-    // 对于CORS错误，我们可以使用一个简单的本地验证
-    // 这不是最安全的方法，但可以作为临时解决方案
-    const validCodes = [
-      '8FpbQktwX00v4ibfx4Ta', // 到2024-12-31
-      'XANFp5VBeNfmhkxo7EWr', // 到2024-06-30
-      'Q0ebZra96sYUnqngAug1'  // 到2024-06-30
-    ];
-
-    if (validCodes.includes(code)) {
-      log('本地验证成功');
-
-      // 设置7天的过期时间
-      const expireAt = Date.now() + 7 * 24 * 60 * 60 * 1000;
-
-      localStorage.setItem('flatland-auth', JSON.stringify({
-        expireAt: expireAt,
-        timestamp: Date.now(),
-        localAuth: true // 标记为本地认证
-      }));
-
-      // 刷新页面以应用新的认证状态
-      setTimeout(() => {
-        location.reload();
-      }, 500);
-
-      return true;
-    }
-
-    alert('访问码无效或已过期');
-    return false;
-  }
 
   // 清除认证数据
   function clearAuth() {
@@ -285,9 +269,13 @@
         }
       }, 1000);
 
-      // 如果用户未认证，不自动触发认证流程，让用户手动点击认证按钮
+      // 如果用户未认证，自动触发认证流程
       if (!isAuthenticated()) {
-        log('用户未认证，等待用户手动触发认证');
+        log('用户未认证，自动触发认证流程');
+        // 使用setTimeout确保不会阻塞Docsify初始化
+        setTimeout(function() {
+          authenticate();
+        }, 1500);
       } else {
         log('用户已认证，继续初始化');
       }
@@ -340,4 +328,84 @@
 
   // 将认证函数暴露到全局，以便用户可以手动触发认证
   window.startFlatlandAuth = authenticate;
+
+  // 在页面加载完成后检查认证状态
+  window.addEventListener('load', function() {
+    log('页面加载完成，检查认证状态');
+
+    if (!isAuthenticated()) {
+      log('用户未认证，显示认证提示');
+
+      // 创建一个固定在页面顶部的认证提示
+      const authBanner = document.createElement('div');
+      authBanner.className = 'auth-banner';
+      authBanner.innerHTML = `
+        <div class="auth-banner-content">
+          <span>您当前正在以未认证状态查看文档。某些功能可能受限。</span>
+          <button onclick="window.startFlatlandAuth()" class="auth-banner-button">立即认证</button>
+          <button onclick="this.parentNode.parentNode.style.display='none'" class="auth-banner-close">×</button>
+        </div>
+      `;
+
+      // 添加样式
+      const style = document.createElement('style');
+      style.textContent = `
+        .auth-banner {
+          position: fixed;
+          top: 0;
+          left: 0;
+          right: 0;
+          background-color: #f8f8f8;
+          border-bottom: 1px solid #e8e8e8;
+          z-index: 1000;
+          padding: 10px;
+          text-align: center;
+          box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+        }
+        .auth-banner-content {
+          display: flex;
+          align-items: center;
+          justify-content: center;
+          max-width: 800px;
+          margin: 0 auto;
+        }
+        .auth-banner-button {
+          margin-left: 15px;
+          padding: 5px 10px;
+          background-color: #42b983;
+          color: white;
+          border: none;
+          border-radius: 4px;
+          cursor: pointer;
+        }
+        .auth-banner-button:hover {
+          background-color: #3aa776;
+        }
+        .auth-banner-close {
+          margin-left: 15px;
+          background: none;
+          border: none;
+          font-size: 20px;
+          cursor: pointer;
+          color: #999;
+        }
+        .auth-banner-close:hover {
+          color: #666;
+        }
+      `;
+      document.head.appendChild(style);
+
+      // 添加到页面
+      document.body.insertBefore(authBanner, document.body.firstChild);
+
+      // 调整页面内容的上边距，避免被横幅遮挡
+      setTimeout(function() {
+        const mainContent = document.querySelector('.content') || document.querySelector('main');
+        if (mainContent) {
+          const bannerHeight = authBanner.offsetHeight;
+          mainContent.style.marginTop = (bannerHeight + 10) + 'px';
+        }
+      }, 100);
+    }
+  });
 })();
