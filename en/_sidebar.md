@@ -5,7 +5,6 @@
   - [Town System](/en/Guide/TownSystem)
   - [Event System](/en/Guide/EventSystem)
   - [AI Agent System](/en/Guide/AIAgentSystem)
-  - [Token System](/en/Guide/TokenSystem)
   - [Player Guide](/en/Guide/PlayerGuide)
   - [Technical Architecture](/en/Guide/TechnicalArchitecture)
   - [Dynamic NFT](/en/Guide/NFT)

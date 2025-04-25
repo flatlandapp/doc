@@ -5,7 +5,6 @@
   - [小镇系统](/zh-cn/Guide/TownSystem)
   - [事件系统](/zh-cn/Guide/EventSystem)
   - [AI代理系统](/zh-cn/Guide/AIAgentSystem)
-  - [代币系统](/zh-cn/Guide/TokenSystem)
   - [玩家指南](/zh-cn/Guide/PlayerGuide)
   - [技术架构](/zh-cn/Guide/TechnicalArchitecture)
 - [AI原创故事](/zh-cn/story/README)
