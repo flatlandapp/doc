@@ -4,6 +4,7 @@ The TLF protocol's smart contract design is modular and efficient. Here are the 
 
 ## 3.5.1 Main Contract Interface: EventGovernance
 
+### Solidity Implementation
 ```solidity
 // SPDX-License-Identifier: MIT
 pragma solidity ^0.8.17;
@@ -44,8 +45,100 @@ interface IEventGovernance {
 }
 ```
 
+### Rust Implementation
+```rust
+// Rust version of the event governance interface
+
+#[derive(Debug, Clone, PartialEq)]
+pub enum EventStatus {
+    Proposed,
+    Voting,
+    Approved,
+    Rejected,
+    Executed,
+    Expired,
+}
+
+#[derive(Debug, Clone)]
+pub struct Event {
+    pub id: u64,                // Event ID
+    pub creator: String,        // Creator address
+    pub content_hash: String,   // Content hash (IPFS)
+    pub start_time: u64,        // Voting start time
+    pub end_time: u64,          // Voting end time
+    pub positive_votes: u64,    // Positive votes
+    pub negative_votes: u64,    // Negative votes
+    pub executed: bool,         // Whether executed
+    pub status: EventStatus,    // Event status
+}
+
+// Event governance trait
+pub trait EventGovernance {
+    // Core functions
+    fn propose_event(&mut self, content_hash: String) -> Result<u64, String>;
+    fn cast_vote(&mut self, event_id: u64, vote_value: i64) -> Result<(), String>;
+    fn execute_event(&mut self, event_id: u64) -> Result<(), String>;
+    fn cancel_event(&mut self, event_id: u64) -> Result<(), String>;
+
+    // Query functions
+    fn get_event(&self, event_id: u64) -> Option<Event>;
+    fn get_voter_weight(&self, voter: &str) -> u64;
+    fn get_voter_vote(&self, event_id: u64, voter: &str) -> i64;
+    fn get_active_events(&self) -> Vec<u64>;
+}
+```
+
+### C++ Implementation
+```cpp
+// C++ version of the event governance interface
+
+#include <string>
+#include <vector>
+#include <optional>
+#include <cstdint>
+
+enum class EventStatus {
+    Proposed,
+    Voting,
+    Approved,
+    Rejected,
+    Executed,
+    Expired
+};
+
+struct Event {
+    uint64_t id;                // Event ID
+    std::string creator;        // Creator address
+    std::string contentHash;    // Content hash (IPFS)
+    uint64_t startTime;         // Voting start time
+    uint64_t endTime;           // Voting end time
+    uint64_t positiveVotes;     // Positive votes
+    uint64_t negativeVotes;     // Negative votes
+    bool executed;              // Whether executed
+    EventStatus status;         // Event status
+};
+
+class IEventGovernance {
+public:
+    virtual ~IEventGovernance() = default;
+
+    // Core functions
+    virtual uint64_t proposeEvent(const std::string& contentHash) = 0;
+    virtual void castVote(uint64_t eventId, int64_t voteValue) = 0;
+    virtual void executeEvent(uint64_t eventId) = 0;
+    virtual void cancelEvent(uint64_t eventId) = 0;
+
+    // Query functions
+    virtual std::optional<Event> getEvent(uint64_t eventId) const = 0;
+    virtual uint64_t getVoterWeight(const std::string& voter) const = 0;
+    virtual int64_t getVoterVote(uint64_t eventId, const std::string& voter) const = 0;
+    virtual std::vector<uint64_t> getActiveEvents() const = 0;
+};
+```
+
 ## 3.5.2 Auxiliary Contract Interface: StakingRegistry
 
+### Solidity Implementation
 ```solidity
 // SPDX-License-Identifier: MIT
 pragma solidity ^0.8.17;
@@ -73,8 +166,63 @@ interface IStakingRegistry {
 }
 ```
 
+### Rust Implementation
+```rust
+// Rust version of the staking registry interface
+
+#[derive(Debug, Clone)]
+pub struct StakeInfo {
+    pub amount: u64,        // Staked amount
+    pub start_time: u64,    // Staking start time
+    pub lock_period: u64,   // Lock period (days)
+}
+
+pub trait StakingRegistry {
+    // Staking functions
+    fn stake(&mut self, amount: u64, lock_period: u64) -> Result<(), String>;
+    fn unstake(&mut self, amount: u64) -> Result<(), String>;
+    fn claim_rewards(&mut self) -> Result<u64, String>;
+
+    // Query functions
+    fn get_stake_info(&self, user: &str) -> Option<StakeInfo>;
+    fn calculate_voting_power(&self, user: &str) -> u64;
+    fn get_total_staked(&self) -> u64;
+}
+```
+
+### C++ Implementation
+```cpp
+// C++ version of the staking registry interface
+
+#include <string>
+#include <optional>
+#include <cstdint>
+
+struct StakeInfo {
+    uint64_t amount;        // Staked amount
+    uint64_t startTime;     // Staking start time
+    uint64_t lockPeriod;    // Lock period (days)
+};
+
+class IStakingRegistry {
+public:
+    virtual ~IStakingRegistry() = default;
+
+    // Staking functions
+    virtual void stake(uint64_t amount, uint64_t lockPeriod) = 0;
+    virtual void unstake(uint64_t amount) = 0;
+    virtual void claimRewards() = 0;
+
+    // Query functions
+    virtual std::optional<StakeInfo> getStakeInfo(const std::string& user) const = 0;
+    virtual uint64_t calculateVotingPower(const std::string& user) const = 0;
+    virtual uint64_t getTotalStaked() const = 0;
+};
+```
+
 ## 3.5.3 Auxiliary Contract Interface: EventExecutor
 
+### Solidity Implementation
 ```solidity
 // SPDX-License-Identifier: MIT
 pragma solidity ^0.8.17;
@@ -98,6 +246,59 @@ interface IEventExecutor {
     function getExecutionResult(uint256 eventId) external view returns (ExecutionResult memory);
     function getPendingExecutions() external view returns (uint256[] memory);
 }
+```
+
+### Rust Implementation
+```rust
+// Rust version of the event executor interface
+
+#[derive(Debug, Clone)]
+pub struct ExecutionResult {
+    pub success: bool,           // Whether execution succeeded
+    pub result_data: Vec<u8>,    // Execution result data
+    pub timestamp: u64,          // Execution timestamp
+    pub affected_ids: Vec<u64>,  // Affected game object IDs
+}
+
+pub trait EventExecutor {
+    // Execution functions
+    fn execute_event(&mut self, event_id: u64, execution_params: &[u8]) -> Result<ExecutionResult, String>;
+    fn validate_execution(&self, event_id: u64, execution_params: &[u8]) -> Result<bool, String>;
+
+    // Query functions
+    fn get_execution_result(&self, event_id: u64) -> Option<ExecutionResult>;
+    fn get_pending_executions(&self) -> Vec<u64>;
+}
+```
+
+### C++ Implementation
+```cpp
+// C++ version of the event executor interface
+
+#include <string>
+#include <vector>
+#include <optional>
+#include <cstdint>
+
+struct ExecutionResult {
+    bool success;                    // Whether execution succeeded
+    std::vector<uint8_t> resultData; // Execution result data
+    uint64_t timestamp;              // Execution timestamp
+    std::vector<uint64_t> affectedIds; // Affected game object IDs
+};
+
+class IEventExecutor {
+public:
+    virtual ~IEventExecutor() = default;
+
+    // Execution functions
+    virtual ExecutionResult executeEvent(uint64_t eventId, const std::vector<uint8_t>& executionParams) = 0;
+    virtual std::pair<bool, std::string> validateExecution(uint64_t eventId, const std::vector<uint8_t>& executionParams) const = 0;
+
+    // Query functions
+    virtual std::optional<ExecutionResult> getExecutionResult(uint64_t eventId) const = 0;
+    virtual std::vector<uint64_t> getPendingExecutions() const = 0;
+};
 ```
 
 ## 3.5.4 Core Process Flow
