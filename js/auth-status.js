@@ -1,33 +1,11 @@
-// 认证状态指示器
+// 认证状态指示器 - 简化版本
 (function() {
-  // 调试标志
-  const DEBUG = true;
-
-  // 日志函数
-  function log(...args) {
-    if (DEBUG) {
-      console.log('[AuthStatus]', ...args);
-    }
-  }
+  console.log('[AuthStatus] 认证状态指示器加载');
 
   // 检查用户是否已认证
   function isAuthenticated() {
     try {
-      // 尝试从两个可能的键名获取认证数据
-      let authData = localStorage.getItem('flatland-auth');
-
-      // 如果没有找到，尝试旧的键名
-      if (!authData) {
-        authData = localStorage.getItem('flatworld-auth');
-
-        // 如果找到了旧键名的数据，迁移到新键名
-        if (authData) {
-          localStorage.setItem('flatland-auth', authData);
-          localStorage.removeItem('flatworld-auth');
-          log('已将认证数据从旧键名迁移到新键名');
-        }
-      }
-
+      const authData = localStorage.getItem('flatland-auth');
       if (!authData) return false;
 
       const authObj = JSON.parse(authData);
@@ -49,14 +27,14 @@
         expireAt: authObj.expireAt
       };
     } catch (e) {
-      console.error('检查认证状态出错:', e);
+      console.error('[AuthStatus] 检查认证状态出错:', e);
       return false;
     }
   }
 
   // 添加认证状态指示器
   function addAuthStatusIndicator() {
-    log('添加认证状态指示器');
+    console.log('[AuthStatus] 添加认证状态指示器');
 
     // 等待导航栏加载完成
     const checkNav = setInterval(() => {
