@@ -4,7 +4,7 @@
   function isAuthenticated() {
     const authData = localStorage.getItem('flatworld-auth');
     if (!authData) return false;
-    
+
     try {
       const { expireAt } = JSON.parse(authData);
       return expireAt > Date.now();
@@ -18,6 +18,8 @@
     if (!code) return false;
 
     try {
+      console.log('正在尝试认证，API地址:', AUTH_API);
+
       const response = await fetch(AUTH_API, {
         method: 'POST',
         headers: {
@@ -26,7 +28,11 @@
         body: JSON.stringify({ code })
       });
 
+      console.log('认证响应状态:', response.status);
+
       const data = await response.json();
+      console.log('认证响应数据:', data);
+
       if (data.success) {
         localStorage.setItem('flatworld-auth', JSON.stringify({
           expireAt: data.expireAt
@@ -38,7 +44,12 @@
       return false;
     } catch (e) {
       console.error('认证失败:', e);
-      alert('认证服务出错，请稍后重试');
+      // 提供更详细的错误信息
+      if (e instanceof TypeError && e.message.includes('Failed to fetch')) {
+        alert('无法连接到认证服务，请检查网络连接或联系管理员');
+      } else {
+        alert('认证服务出错，请稍后重试。错误详情: ' + e.message);
+      }
       return false;
     }
   }
