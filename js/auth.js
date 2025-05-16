@@ -13,7 +13,7 @@
     }
   }
 
-  // 检查用户是否已认证
+  // 检查用户是否已认证 - 不再检查过期时间
   function isAuthenticated() {
     try {
       // 尝试从两个可能的键名获取认证数据
@@ -33,14 +33,8 @@
 
       log('检查认证状态, 存储数据:', authData);
 
-      if (!authData) return false;
-
-      const { expireAt } = JSON.parse(authData);
-      const now = Date.now();
-      const isValid = expireAt > now;
-
-      log('认证有效期检查:', { expireAt, now, isValid });
-      return isValid;
+      // 只要有认证数据就认为是已认证，不再检查过期时间
+      return !!authData;
     } catch (e) {
       console.error('检查认证状态出错:', e);
       return false;
@@ -84,21 +78,20 @@
 
       // 首先尝试本地验证
       const validCodes = [
-        '8FpbQktwX00v4ibfx4Ta', // 到2024-12-31
-        'XANFp5VBeNfmhkxo7EWr', // 到2024-06-30
-        'Q0ebZra96sYUnqngAug1'  // 到2024-06-30
+        '8FpbQktwX00v4ibfx4Ta',
+        'XANFp5VBeNfmhkxo7EWr',
+        'Q0ebZra96sYUnqngAug1',
+        'CQ6J4BKu9aCGpBq86gem' // 添加您的访问码
       ];
 
       if (validCodes.includes(code)) {
         log('本地验证成功');
 
-        // 设置7天的过期时间
-        const expireAt = Date.now() + 7 * 24 * 60 * 60 * 1000;
-
+        // 不再设置过期时间，而是设置永久有效标志
         localStorage.setItem('flatland-auth', JSON.stringify({
-          expireAt: expireAt,
           timestamp: Date.now(),
-          localAuth: true // 标记为本地认证
+          localAuth: true, // 标记为本地认证
+          permanent: true  // 标记为永久有效
         }));
 
         alert('认证成功！');
@@ -139,12 +132,10 @@
           const data = await response.json();
 
           if (data.success) {
-            // 设置认证数据
-            const expireTime = data.expireAt || (Date.now() + 7 * 24 * 60 * 60 * 1000);
-
+            // 设置认证数据，不再使用过期时间
             localStorage.setItem('flatland-auth', JSON.stringify({
-              expireAt: expireTime,
-              timestamp: Date.now()
+              timestamp: Date.now(),
+              permanent: true // 标记为永久有效
             }));
 
             alert('认证成功！');

@@ -12,7 +12,7 @@
       background-color: #f5f7f9;
       color: #34495e;
     }
-    
+
     .auth-page {
       display: flex;
       align-items: center;
@@ -20,7 +20,7 @@
       min-height: 100vh;
       padding: 20px;
     }
-    
+
     .auth-container {
       background-color: white;
       border-radius: 8px;
@@ -30,42 +30,42 @@
       padding: 40px;
       text-align: center;
     }
-    
+
     .auth-logo {
       margin-bottom: 20px;
     }
-    
+
     .auth-logo img {
       max-width: 120px;
       height: auto;
     }
-    
+
     .auth-container h1 {
       margin: 0 0 30px;
       color: #42b983;
       font-size: 24px;
     }
-    
+
     .auth-form {
       text-align: left;
     }
-    
+
     .auth-form h2 {
       margin: 0 0 10px;
       font-size: 20px;
       color: #2c3e50;
     }
-    
+
     .auth-form p {
       margin: 0 0 20px;
       color: #7f8c8d;
     }
-    
+
     .auth-input-group {
       display: flex;
       margin-bottom: 15px;
     }
-    
+
     .auth-input-group input {
       flex: 1;
       padding: 12px 15px;
@@ -74,11 +74,11 @@
       font-size: 16px;
       outline: none;
     }
-    
+
     .auth-input-group input:focus {
       border-color: #42b983;
     }
-    
+
     .auth-input-group button {
       padding: 12px 20px;
       background-color: #42b983;
@@ -89,11 +89,11 @@
       cursor: pointer;
       white-space: nowrap;
     }
-    
+
     .auth-input-group button:hover {
       background-color: #3aa776;
     }
-    
+
     #auth-message {
       color: #e74c3c;
       min-height: 20px;
@@ -124,53 +124,52 @@
   <script>
     // 有效的本地访问码
     const VALID_CODES = [
-      '8FpbQktwX00v4ibfx4Ta', // 到2024-12-31
-      'XANFp5VBeNfmhkxo7EWr', // 到2024-06-30
-      'Q0ebZra96sYUnqngAug1'  // 到2024-06-30
+      '8FpbQktwX00v4ibfx4Ta',
+      'XANFp5VBeNfmhkxo7EWr',
+      'Q0ebZra96sYUnqngAug1',
+      'CQ6J4BKu9aCGpBq86gem' // 添加您的访问码
     ];
-    
+
     // 验证访问码
     function validateCode(code) {
       // 本地验证
       if (VALID_CODES.includes(code)) {
         console.log('本地验证成功');
-        
-        // 设置7天的过期时间
-        const expireAt = Date.now() + 7 * 24 * 60 * 60 * 1000;
-        
+
+        // 不再设置过期时间，而是设置永久有效标志
         localStorage.setItem('flatland-auth', JSON.stringify({
-          expireAt: expireAt,
           timestamp: Date.now(),
-          localAuth: true
+          localAuth: true,
+          permanent: true // 标记为永久有效
         }));
-        
+
         return true;
       }
-      
+
       return false;
     }
-    
+
     // 获取元素
     const codeInput = document.getElementById('auth-code-input');
     const submitBtn = document.getElementById('auth-submit-btn');
     const messageEl = document.getElementById('auth-message');
-    
+
     // 设置焦点
     setTimeout(() => codeInput.focus(), 100);
-    
+
     // 处理提交
     function handleSubmit() {
       const code = codeInput.value.trim();
-      
+
       if (!code) {
         messageEl.textContent = '请输入访问码';
         codeInput.focus();
         return;
       }
-      
+
       messageEl.textContent = '正在验证...';
       submitBtn.disabled = true;
-      
+
       // 验证访问码
       if (validateCode(code)) {
         messageEl.textContent = '认证成功，正在加载文档...';
@@ -184,7 +183,7 @@
         codeInput.focus();
       }
     }
-    
+
     // 绑定事件
     submitBtn.addEventListener('click', handleSubmit);
     codeInput.addEventListener('keypress', function(e) {
@@ -192,20 +191,18 @@
         handleSubmit();
       }
     });
-    
-    // 检查是否已认证
+
+    // 检查是否已认证 - 不再检查过期时间
     function isAuthenticated() {
       try {
         const authData = localStorage.getItem('flatland-auth');
-        if (!authData) return false;
-        
-        const authObj = JSON.parse(authData);
-        return !(authObj.expireAt && authObj.expireAt < Date.now());
+        // 只要有认证数据就认为是已认证
+        return !!authData;
       } catch (e) {
         return false;
       }
     }
-    
+
     // 如果已认证，直接跳转到文档页面
     if (isAuthenticated()) {
       window.location.href = 'index.html';

@@ -2,7 +2,7 @@
 (function() {
   console.log('[AuthStatus] 认证状态指示器加载');
 
-  // 检查用户是否已认证
+  // 检查用户是否已认证 - 不再检查过期时间
   function isAuthenticated() {
     try {
       const authData = localStorage.getItem('flatland-auth');
@@ -10,21 +10,16 @@
 
       const authObj = JSON.parse(authData);
 
-      // 检查认证是否过期
-      if (authObj.expireAt && authObj.expireAt < Date.now()) {
-        localStorage.removeItem('flatland-auth');
-        return false;
-      }
-
       // 检查是否是临时认证或本地认证
       const isTemporary = authObj.temporary === true;
       const isLocal = authObj.localAuth === true;
+      const isPermanent = authObj.permanent === true;
 
       return {
         valid: true,
         temporary: isTemporary,
         local: isLocal,
-        expireAt: authObj.expireAt
+        permanent: isPermanent
       };
     } catch (e) {
       console.error('[AuthStatus] 检查认证状态出错:', e);
@@ -56,19 +51,10 @@
           const isTemp = authStatus && authStatus.temporary;
           const isLocal = authStatus && authStatus.local;
 
-          // 计算过期时间
+          // 不再显示过期时间信息
           let expireInfo = '';
-          if (isAuth && authStatus.expireAt) {
-            const now = Date.now();
-            const expireTime = authStatus.expireAt;
-            const diffHours = Math.round((expireTime - now) / (1000 * 60 * 60));
-
-            if (diffHours < 24) {
-              expireInfo = `(${diffHours}小时后过期)`;
-            } else {
-              const diffDays = Math.round(diffHours / 24);
-              expireInfo = `(${diffDays}天后过期)`;
-            }
+          if (isAuth && authStatus.permanent) {
+            expireInfo = '(永久有效)';
           }
 
           // 确定状态图标和文本
