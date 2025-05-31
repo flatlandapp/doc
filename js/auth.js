@@ -13,9 +13,12 @@
     }
   }
 
-  // 检查用户是否已认证 - 不再检查过期时间
+  // 检查用户是否已认证 - 不再检查过期时间，但检查认证版本
   function isAuthenticated() {
     try {
+      // 当前认证版本，用于使旧的认证失效
+      const CURRENT_AUTH_VERSION = '2025-05-31';
+
       // 尝试从两个可能的键名获取认证数据
       let authData = localStorage.getItem('flatland-auth');
 
@@ -33,10 +36,26 @@
 
       log('检查认证状态, 存储数据:', authData);
 
-      // 只要有认证数据就认为是已认证，不再检查过期时间
-      return !!authData;
+      if (!authData) return false;
+
+      // 解析认证数据
+      const authObj = JSON.parse(authData);
+
+      // 检查认证版本，如果版本不匹配则清除旧认证
+      if (!authObj.version || authObj.version !== CURRENT_AUTH_VERSION) {
+        log('认证版本过期，清除旧认证数据');
+        localStorage.removeItem('flatland-auth');
+        localStorage.removeItem('flatworld-auth');
+        return false;
+      }
+
+      // 只要有认证数据且版本匹配就认为是已认证
+      return true;
     } catch (e) {
       console.error('检查认证状态出错:', e);
+      // 如果解析出错，清除可能损坏的认证数据
+      localStorage.removeItem('flatland-auth');
+      localStorage.removeItem('flatworld-auth');
       return false;
     }
   }
@@ -78,20 +97,18 @@
 
       // 首先尝试本地验证
       const validCodes = [
-        '8FpbQktwX00v4ibfx4Ta',
-        'XANFp5VBeNfmhkxo7EWr',
-        'Q0ebZra96sYUnqngAug1',
-        'CQ6J4BKu9aCGpBq86gem' // 添加您的访问码
+        '8FpbQktwX00v4ibfx4T1' // 唯一有效的访问码
       ];
 
       if (validCodes.includes(code)) {
         log('本地验证成功');
 
-        // 不再设置过期时间，而是设置永久有效标志
+        // 不再设置过期时间，而是设置永久有效标志，并添加版本号
         localStorage.setItem('flatland-auth', JSON.stringify({
           timestamp: Date.now(),
           localAuth: true, // 标记为本地认证
-          permanent: true  // 标记为永久有效
+          permanent: true, // 标记为永久有效
+          version: '2025-05-31' // 认证版本号
         }));
 
         alert('认证成功！');
@@ -132,10 +149,11 @@
           const data = await response.json();
 
           if (data.success) {
-            // 设置认证数据，不再使用过期时间
+            // 设置认证数据，不再使用过期时间，并添加版本号
             localStorage.setItem('flatland-auth', JSON.stringify({
               timestamp: Date.now(),
-              permanent: true // 标记为永久有效
+              permanent: true, // 标记为永久有效
+              version: '2025-05-31' // 认证版本号
             }));
 
             alert('认证成功！');

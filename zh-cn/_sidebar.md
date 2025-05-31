@@ -9,6 +9,7 @@
   - [技术架构](/zh-cn/Guide/TechnicalArchitecture)
 - [AI原创故事](/zh-cn/story/README)
     - [平面国遗迹的秘密](/zh-cn/story/story_1)
+<!-- 白皮书部分暂时隐藏，以后再添加
 - [白皮书](/zh-cn/whitepaper/0-description)
   - [1-引言](/zh-cn/whitepaper/1-0-introduction)
   - [1.1-Web2局限性](/zh-cn/whitepaper/1-1-web2-limitations)
@@ -46,4 +47,5 @@
   - [8.0-结论](/zh-cn/whitepaper/8-0-conclusion)
   - [参考文献](/zh-cn/whitepaper/references)
   - [联系方式](/zh-cn/whitepaper/contact)
+-->
 - [切换语言](/en/Guide/README)

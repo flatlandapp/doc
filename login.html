@@ -124,10 +124,7 @@
   <script>
     // 有效的本地访问码
     const VALID_CODES = [
-      '8FpbQktwX00v4ibfx4Ta',
-      'XANFp5VBeNfmhkxo7EWr',
-      'Q0ebZra96sYUnqngAug1',
-      'CQ6J4BKu9aCGpBq86gem' // 添加您的访问码
+      '8FpbQktwX00v4ibfx4T1' // 唯一有效的访问码
     ];
 
     // 验证访问码
@@ -136,11 +133,12 @@
       if (VALID_CODES.includes(code)) {
         console.log('本地验证成功');
 
-        // 不再设置过期时间，而是设置永久有效标志
+        // 不再设置过期时间，而是设置永久有效标志，并添加版本号
         localStorage.setItem('flatland-auth', JSON.stringify({
           timestamp: Date.now(),
           localAuth: true,
-          permanent: true // 标记为永久有效
+          permanent: true, // 标记为永久有效
+          version: '2025-05-31' // 认证版本号
         }));
 
         return true;
@@ -192,13 +190,29 @@
       }
     });
 
-    // 检查是否已认证 - 不再检查过期时间
+    // 检查是否已认证 - 不再检查过期时间，但检查认证版本
     function isAuthenticated() {
       try {
+        // 当前认证版本，用于使旧的认证失效
+        const CURRENT_AUTH_VERSION = '2025-05-31';
+
         const authData = localStorage.getItem('flatland-auth');
-        // 只要有认证数据就认为是已认证
-        return !!authData;
+        if (!authData) return false;
+
+        const authObj = JSON.parse(authData);
+
+        // 检查认证版本，如果版本不匹配则清除旧认证
+        if (!authObj.version || authObj.version !== CURRENT_AUTH_VERSION) {
+          localStorage.removeItem('flatland-auth');
+          localStorage.removeItem('flatworld-auth');
+          return false;
+        }
+
+        return true;
       } catch (e) {
+        // 如果解析出错，清除可能损坏的认证数据
+        localStorage.removeItem('flatland-auth');
+        localStorage.removeItem('flatworld-auth');
         return false;
       }
     }

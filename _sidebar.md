@@ -10,6 +10,7 @@
     - [技术架构](/zh-cn/Guide/TechnicalArchitecture)
     - [NFT](/zh-cn/Guide/NFT)
     - [事件机制](/zh-cn/Guide/Event)
+<!-- 白皮书部分暂时隐藏，以后再添加
   - [白皮书](/zh-cn/whitepaper/0-description)
     - [1-引言](/zh-cn/whitepaper/1-0-introduction)
     - [1.1-Web2局限性](/zh-cn/whitepaper/1-1-web2-limitations)
@@ -47,6 +48,7 @@
     - [8.0-结论](/zh-cn/whitepaper/8-0-conclusion)
     - [参考文献](/zh-cn/whitepaper/references)
     - [联系方式](/zh-cn/whitepaper/contact)
+-->
 - English
   - [Game Guide](/en/Guide/README)
     - [Game Overview](/en/Guide/GameOverview)
@@ -58,6 +60,7 @@
     - [Technical Architecture](/en/Guide/TechnicalArchitecture)
     - [NFT](/en/Guide/NFT)
     - [Event Mechanism](/en/Guide/Event)
+<!-- 白皮书部分暂时隐藏，以后再添加
   - [Whitepaper](/en/whitepaper/0-description)
     - [1-Introduction](/en/whitepaper/1-0-introduction)
     - [1.1-Web2 Limitations](/en/whitepaper/1-1-web2-limitations)
@@ -95,3 +98,4 @@
     - [8.0-Conclusion](/en/whitepaper/8-0-conclusion)
     - [References](/en/whitepaper/references)
     - [Contact](/en/whitepaper/contact)
+-->

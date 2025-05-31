@@ -10,6 +10,7 @@
   - [Dynamic NFT](/en/Guide/NFT)
 - [AI-Generated Stories](/en/story/README)
     - [Secrets of the Flatland Ruins](/en/story/story_1)
+<!-- 白皮书部分暂时隐藏，以后再添加
 - [Whitepaper](/en/whitepaper/0-description)
   - [1-Introduction](/en/whitepaper/1-0-introduction)
   - [1.1-Web2 Limitations](/en/whitepaper/1-1-web2-limitations)
@@ -47,4 +48,5 @@
   - [8.0-Conclusion](/en/whitepaper/8-0-conclusion)
   - [References](/en/whitepaper/references)
   - [Contact](/en/whitepaper/contact)
+-->
 - [Switch Language](/zh-cn/Guide/README)
